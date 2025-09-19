@@ -30,9 +30,11 @@ a {
   text-align: center;
   color: #fff;
   font-size: 1.8rem;
+  transition: opacity, transform 0.2s ease-out;
   font-weight: 400;
 }
 .btn:hover {
+  transform: translateY(-10px);
   opacity: 0.8;
 }
 .row {
@@ -43,6 +45,45 @@ a {
   font-size: 1.8rem;
   font-weight: 300;
   line-height: 1.67; /* 166.667% */
+}
+/* ------------------------- LOADER ------------------------- */
+.loader {
+  background-color: rgba(0, 0, 0, 0.938);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spinner {
+  --size: 200px;
+  --bg-color: hsla(233, 10%, 90%, 0.1);
+  --line-color: #2e80ce;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+.spinner::after {
+  content: "";
+  animation: spinner 0.8s ease-out 3 backwards;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border: 20px solid var(--bg-color);
+  border-radius: 50%;
+  border-top-color: var(--line-color);
+  box-shadow: 0 0 20px var(--bg-color);
+}
+@keyframes spinner {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
 }
 /* ------------------------- HEADER ------------------------- */
 .header {
@@ -95,6 +136,7 @@ a {
   line-height: 44px;
   font-size: 1.6rem;
 }
+
 .section {
   margin-top: 100px;
   padding: 70px;
@@ -162,6 +204,15 @@ a {
   object-fit: cover;
   border-radius: 6px;
 }
+.hero__btn {
+  transition: box-shadow, border, background-color 0.2s ease-out;
+}
+.hero__btn:hover {
+  transform: none;
+  background-color: transparent;
+  border: 1px solid #fff;
+  box-shadow: 1px 1px 5px #fff;
+}
 /* ------------------------- SERVICE ------------------------- */
 .service {
   display: flex;
@@ -196,10 +247,12 @@ a {
   padding: 20px;
   width: 470px;
   height: 128px;
+  transition: transform, box-shadow 1s ease;
   border-radius: 10px;
 }
 .service-item:hover {
   box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
   cursor: pointer;
 }
 .service-item__heading {
@@ -223,13 +276,19 @@ a {
   color: #10375c;
   background: #eff6fd;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.05);
+  transition: color, background-color 1s ease;
 }
 .service-item:hover .service-item__icon {
   color: #fff;
-  background: #2e80ce;
+  background-color: #2e80ce;
 }
 .service-btn {
   margin-top: 55px;
+  transition: opacity, transform 0.2s ease-out;
+}
+.service-btn:hover {
+  transform: translateY(-10px);
+  opacity: 0.8;
 }
 /* ------------------------- WORK ------------------------- */
 .work {
@@ -254,6 +313,8 @@ a {
 .work-item:hover {
   border-color: #2e80ce;
   cursor: pointer;
+  transform: translateY(-16px);
+  transition: transform 0.5s ease-out;
 }
 .work-item__icon {
   width: 72px;
@@ -279,9 +340,11 @@ a {
   color: #575f66;
   font-weight: 300;
   line-height: 1.75; /* 175% */
+  transition: color, font-weight 1s ease-out;
 }
 .more:hover {
   color: #2e80ce;
+
   font-weight: 400;
   cursor: pointer;
 }
@@ -367,6 +430,7 @@ a {
 }
 .control__btn {
   display: flex;
+  transition: color, background-color 0.5s ease;
   align-items: center;
   justify-content: center;
   color: #575f66;
@@ -380,7 +444,6 @@ a {
   background-color: #2e80ce;
   color: #fff;
   cursor: pointer;
-  transition: 0.25s;
 }
 /* ------------------------- CTA MOBILE ------------------------- */
 .cta-mobile {
@@ -556,16 +619,44 @@ a {
   background-color: transparent;
 }
 .footer-btn {
+  position: relative;
   border-radius: 4px;
   background: #2e80ce;
   width: 108px;
   height: 46px;
   border: none;
-  color: #fff;
   font-family: "Open Sans";
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.85; /* 185.714% */
+  z-index: 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+.footer-btn__span {
+  position: relative;
+  color: #fff;
+  z-index: 2;
+  transition: 1s color linear;
+}
+.footer-btn:hover .footer-btn__span {
+  color: #10375c;
+}
+.footer-btn::after {
+  content: "";
+  height: 100%;
+  position: absolute;
+  background-color: #fff;
+  width: 0;
+  bottom: 0;
+  transition: 0.4s width linear;
+  right: 0;
+  z-index: 1;
+}
+
+.footer-btn:hover::after {
+  left: 0;
+  width: 100%;
 }
 .copyright::before {
   content: "";
